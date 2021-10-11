@@ -1,0 +1,87 @@
+Meeting protocols
+
+Date: 2021-10-11
+Time: 09:00 - 12:00
+Place: Zoom
+Present: Jonas Dietrich, Alma Holmsten, Julia Mari Murata, Augusta Olsson, Marie Wicklander
+Moderator: Marie Wicklander
+Protocol writer: Julia Mari Murata
+
+1. Preliminaries
+We opened the meeting with allocating the roles. Marie summarised the objectives of today's meeting.
+
+2. Reports
+During the meeting we received the news that we’ll meet Bastien and Estel the same day at 15.15.
+
+3. Decision issues
+3.1 Organisation
+- having a daily stand-up at 9 am on Zoom
+- using Slack, GitHub and LaTex  
+- conducting the data analysis together and then divide the writing tasks among the group members
+- focusing on literature research and analysis as soon as we have access to the data
+3.2 Data analysis
+- use Python, maybe Matlab
+
+4. Discussion issues
+- scheduling the tasks/ setting preliminary goals
+- how to structure the report
+   
+   
+   
+Date: 2021-10-11
+Time: 15:00 - 16:00
+Place: Zoom
+Present: Jonas Dietrich, Estel Font, Alma Holmsten, Julia Mari Murata, Augusta Olsson, Marie Wicklander, Bastien Queste
+Moderator: Jonas Dietrich
+Protocol writer: Julia Mari Murata
+
+1. Preliminaries
+Jonas opened the meeting and summarised the objectives of the meeting: define the aim of the project and get access to data. 
+ 
+2. Reports
+Bastien and Estel introduced the project: the project is a collaboration with 'Voice of the ocean' who deploy several gliders in the Baltic. Glider data used in our project will refer to 2-3 gliders in the period of March 3 to September. The different gliders are equally calibrated and have the same setting of sensors (no systematic variations expected). Gliders move continuously a few centimeters per second from surface to a max. depth of 80m. One glider profile corresponds to ~0.5km.
+
+3. Decision issues
+3.1 Organisation
+- drop meeting on Tuesday and do individual studies
+- next group meeting: Wednesday, 13 Oct, 9am, on Zoom, start analysis
+- next meeting with Bastien and Estel: Thursday, 14 Oct, 2pm, on Zoom 
+3.2 Data
+- aim of the project: glider time series analysis, examine chlorophyll data over time and discuss drivers of blooms, discuss distribution in time AND space
+- use daily records of the gliders
+- data will be provided on Tuesday, retrieve it as .csv
+
+4. Discussion issues
+- which parameters to predict phytoplankton blooms do we want to include? (mixed layer depth dynamics, light availability, wind stress, heat fluxes?)
+- referring to euphotic depth: 'how much' light is enough for photosynthesizers being active?
+- statistical analysis?
+
+5. Other
+Links provided by the mentors:
+
+https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5
+
+https://gu-se-primo.hosted.exlibrisgroup.com/primo-explore/fulldisplay?docid=46GUB_KOHA1907708&context=L&vid=46GUB_VU1&lang=en_US&search_scope=default_scope&adaptor=Local%20Search%20Engine&isFrbr=true&tab=default_tab&query=any,contains,Introduction%20to%20the%20Physical%20and%20Biological%20Oceanography%20of%20sharples&sortby=rank
+
+https://md.nordu.net/role/idp.ds?entityID=https%3A%2F%2Fplay.gu.se&return=https%3A%2F%2Fplay.gu.se%2Fmedia%2FMAV107%2520Oceanography%2520lecture%2520%2817_05_2021%29%2520-%2520Temperaturehttps%3A%2F%2Fplay.gu.se%2Fmedia%2FMAV107%2520Oceanography%2520lecture%2520%2817_05_2021%29%2520-%2520Temperature%252C%2520salinity%252C%2520density%2F0_qg53me2rC%2520salinityhttps%3A%2F%2Fplay.gu.se%2Fmedia%2FMAV107%2520Oceanography%2520lecture%2520%2817_05_2021%29%2520-%2520Temperature%252C%2520salinity%252C%2520density%2F0_qg53me2rC%2520density%2F0_qg53me2r
+
+https://play.gu.se/media/MAV107%20Oceanography%20lecture%20(18_05_2021)%20-%20Heat%20fluxes%20and%20the%20global%20thermohaline%20circulation/0_olddi7yl
+
+https://play.gu.se/media/MAV107%20Oceanography%20lecture%20(20_05_2021)%20-%20Stratification/0_cwcirms3
+
+https://play.gu.se/media/MAV107%20Oceanography%20lecture%20(20_05_2021)%20-%20Primary%20Production/0_2xc0k51i
+   
+   
+   
+Date: 2021-10-
+Time: 09:00 - 
+Place: Zoom
+Present: Jonas Dietrich, Alma Holmsten, Julia Mari Murata, Augusta Olsson, Marie Wicklander
+Moderator: 
+Protocol writer: 
+   
+1. Preliminaries
+2. Reports
+3. Decision issues
+4. Discussion issues
+ 
