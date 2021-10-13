@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from datetime import datetime
+import gsw
 
 sal = pd.read_csv("Data/salinity.csv", names=["sal"],
                   converters = {"sal":lambda x:[float(i) for i in x.split(";")]})
@@ -19,6 +20,9 @@ chloro = pd.read_csv("Data/chlorophyll.csv", names=["chloro"],
                    converters = {"chloro":lambda x:[float(i) for i in x.split(";")]})
 
 all_props = sal.join([par,pressure,temp,time,chloro])
+all_props["density"] = ""
+for i in range(len(all_props.sal)):
+    all_props["density"][i] = gsw.sigma0(all_props.sal[i],all_props.temp[i])
 
 def create_figure(x_values, y_values, color_values, colormap):
     stacked_color_values = np.column_stack((all_props[f"{color_values}"]))
