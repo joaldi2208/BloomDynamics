@@ -1,3 +1,4 @@
+HellHeex
 # BloomDynamics
 Observations of bloom dynamics in the Bornholm Basin from gliders
 
@@ -32,4 +33,5 @@ git pull
 ```
 Now your folder should be updated.
 
+written by Marie ^O
 
