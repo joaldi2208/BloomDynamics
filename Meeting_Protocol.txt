@@ -73,6 +73,29 @@ https://play.gu.se/media/MAV107%20Oceanography%20lecture%20(20_05_2021)%20-%20Pr
    
    
    
+Date: 2021-10-13
+Time: 09:00 - 16:00
+Place: Zoom
+Present: Jonas Dietrich, Alma Holmsten, Julia Mari Murata, Augusta Olsson, Marie Wicklander
+Moderator: all
+Protocol writer: Julia Mari Murata
+   
+1. Preliminaries
+We started the analysis, led by Jonas. 
+
+2. Reports
+NA
+
+3. Decision issues
+- assign writing tasks during next meeting: Thursday, 14 Oct, 10:00, on Zoom
+
+4. Discussion issues
+Ask Bastien and Estel:
+- which units have the variables? 
+- statistical anaylsis: PCA?
+
+
+
 Date: 2021-10-
 Time: 09:00 - 
 Place: Zoom

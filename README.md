@@ -32,4 +32,3 @@ git pull
 ```
 Now your folder should be updated.
 
-

@@ -31,7 +31,9 @@ def create_figure(x_values, y_values, color_values, colormap):
     y_axis_values = np.array([y_axis_values])[0,:]
     fig, ax = plt.subplots()
     plot = plt.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}")
-    plt.colorbar(plot)
+    plt.colorbar(plot,label=f"{barlabel}")
+    plt.xlabel("Time (d)")
+    plt.ylabel("Pressure (dbar)")
     ax.invert_yaxis()
     plt.show()
 
@@ -39,5 +41,6 @@ newPlot = input("Do you want to plot:")
 while newPlot == "y":
     variable = input("variable:")
     colormap = input("colormap:")
+    barlabel = input("barlabel:")
     create_figure(all_props["pressure"].values, all_props["time"].values, variable, colormap)
     newPlot = input("Do you want to plot:")
