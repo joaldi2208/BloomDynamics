@@ -86,7 +86,7 @@ def figure_layout(answer):
     
 def choose_variable(i, num_sub):
     variable = input("variable:")
-    im = "hello"
+    im, colormap = None, None
     if variable == "wind":
         wlength = input("Window Length !!must be an ODD number!! [default 21 -> press ENTER]:")
         porder = input("Polynom Order [default 3 -> press ENTER]:")
@@ -98,7 +98,8 @@ def choose_variable(i, num_sub):
             im = wind_stress(fig, ax,21, int(porder),i=i,num_sub=num_sub)
         elif wlength != "" and porder != "":
             im = wind_stress(fig, ax,int(wlength), int(porder),i=i,num_sub=num_sub)
-    colormap = input("colormap:")
+    else:
+        colormap = input("colormap:")
     return variable, colormap, im 
 
 
