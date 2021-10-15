@@ -1,6 +1,10 @@
 \documentclass{article}
 
+\usepackage{tcolorbox}
+%\usepackage{minipage}
+\usepackage{xcolor}
 \usepackage{graphicx}
+\graphicspath{{../Analysis/Images/}}
 \usepackage{subfiles}
 \usepackage[english]{babel}
 \usepackage{todonotes}
@@ -8,29 +12,28 @@
 \usepackage{siunitx}
 \usepackage{booktabs}
 \usepackage[top=2cm,left=2cm,bottom=2cm,right=2cm]{geometry}
-
+\usepackage{times}
+\usepackage{multicol}
 %\usepackage[backend=biber,stye=numeric,sorting=none]{biblatex}
 %\addbibresource{References.bib}
 
-% titlepage
+\definecolor{light-orange}{cmyk}{0,0.06,0.12,0.02}
 \title{Observations of bloom dynamics in the Bornholm Basin from gliders}
-\author{Jonas Dietrich, Alma Holmsten, Augusta Olsson, Marie Wicklander, Julia Murata}
+\author{Jonas Dietrich, Alma Holmsten, Augusta Olsson, Marie Wicklander, Julia Mari Murata}
+\date{\today}
 \begin{document}
-
-\begin{titlepage}
-  \maketitle
-  \thispagestyle{empty}
-\end{titlepage}
+\maketitle
 
 \subfile{Sections/Abstract}
-test\cite{Cauchy20182305}
-\subfile{Sections/Introduction}
-\subfile{Sections/MaterialsAndMethods}
-\subfile{Sections/ResultAndDiscussion}
-\subfile{Sections/Conclusion}
+% %test\cite{Cauchy20182305}
+% \subfile{Sections/Introduction}
+% \subfile{Sections/MaterialsAndMethods}
+% \subfile{Sections/Result}
+% \subfile{Sections/Discussion}
+% \subfile{Sections/Conclusion}
 
 %\printbibliography
 
-\subfile{Sections/Appendix}
+%\subfile{Sections/Appendix}
 
 \end{document}

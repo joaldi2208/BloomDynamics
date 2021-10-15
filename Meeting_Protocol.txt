@@ -1,11 +1,72 @@
-Meeting protocols
+MEETING PROTOCOLS
 
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------   
+Date: 2021-10-14
+Time: 10:00 - 11:00
+Place: Zoom
+Present: Jonas Dietrich, Alma Holmsten, Julia Mari Murata, Augusta Olsson, Marie Wicklander
+Moderator: Augusta
+Protocol writer: Jonas
+----------------------------------------------------------------------------------------------------   
+
+Divide the report:
+- Abstract -> Jonas
+- Introduction -> Marie
+- Methods and Materials -> Julia Mari 
+- Result -> Augusta
+- Discussion -> Alma
+- Conclusion -> Jonas
+
+Decide on the report layout:
+- two column layout in latex
+
+Discussion about the goal:
+- since we will write at the same time, everybody should know what the aim of the project is
+AIM: how does light, temp, salinity... will effect the blooms  
+
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------   
+Title: Meeting with Bastien and Estel
+Date: 2021-10-14
+Time: 14:00 - 14:30
+Place: Zoom
+Present: Jonas Dietrich, Alma Holmsten, Julia Mari Murata, Augusta Olsson, Marie Wicklander
+Moderator: Augusta
+Protocol writer: Jonas
+----------------------------------------------------------------------------------------------------   
+
+- Units: degress, pratical salinity unit (PSU), qW cm-2 nm-1, qg/L (mg/m-3), kg/m3
+- pca is overthinking, critical depth...thresholds  
+- critical depth and mixed depth
+- plots with same x-Axis
+
+Methods and Material:
+- Bastian will provide all information for the glider 
+
+Mixed layer depth
+- start of the pycnocline
+- calculated with threshold (reference) 
+- area until density changes
+- density change from the surface (be carefull with the threshold)
+- shallow mixed layer are more "stable" for pythoplankton
+
+Introduction
+- background to understand the following sections
+- problem, tools 
+
+NEXT MEETING with BASTIEN and ESTEL 12:00 Monday
+NEXT MEETING 13:00 Friday
+
+----------------------------------------------------------------------------------------------------   
+----------------------------------------------------------------------------------------------------
 Date: 2021-10-11
 Time: 09:00 - 12:00
 Place: Zoom
 Present: Jonas Dietrich, Alma Holmsten, Julia Mari Murata, Augusta Olsson, Marie Wicklander
 Moderator: Marie Wicklander
 Protocol writer: Julia Mari Murata
+----------------------------------------------------------------------------------------------------   
 
 1. Preliminaries
 We opened the meeting with allocating the roles. Marie summarised the objectives of today's meeting.
@@ -27,13 +88,15 @@ During the meeting we received the news that we’ll meet Bastien and Estel the 
 - how to structure the report
    
    
-   
+----------------------------------------------------------------------------------------------------   
+----------------------------------------------------------------------------------------------------   
 Date: 2021-10-11
 Time: 15:00 - 16:00
 Place: Zoom
 Present: Jonas Dietrich, Estel Font, Alma Holmsten, Julia Mari Murata, Augusta Olsson, Marie Wicklander, Bastien Queste
 Moderator: Jonas Dietrich
 Protocol writer: Julia Mari Murata
+----------------------------------------------------------------------------------------------------   
 
 1. Preliminaries
 Jonas opened the meeting and summarised the objectives of the meeting: define the aim of the project and get access to data. 
@@ -72,13 +135,15 @@ https://play.gu.se/media/MAV107%20Oceanography%20lecture%20(20_05_2021)%20-%20St
 https://play.gu.se/media/MAV107%20Oceanography%20lecture%20(20_05_2021)%20-%20Primary%20Production/0_2xc0k51i
    
    
-   
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------   
 Date: 2021-10-13
 Time: 09:00 - 16:00
 Place: Zoom
 Present: Jonas Dietrich, Alma Holmsten, Julia Mari Murata, Augusta Olsson, Marie Wicklander
 Moderator: all
 Protocol writer: Julia Mari Murata
+----------------------------------------------------------------------------------------------------   
    
 1. Preliminaries
 We started the analysis, led by Jonas. 
@@ -95,13 +160,15 @@ Ask Bastien and Estel:
 - statistical anaylsis: PCA?
 
 
-
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------   
 Date: 2021-10-
 Time: 09:00 - 
 Place: Zoom
 Present: Jonas Dietrich, Alma Holmsten, Julia Mari Murata, Augusta Olsson, Marie Wicklander
 Moderator: 
 Protocol writer: 
+----------------------------------------------------------------------------------------------------   
    
 1. Preliminaries
 2. Reports
