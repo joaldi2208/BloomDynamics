@@ -106,7 +106,7 @@ def choose_variable(i, num_sub):
 if __name__ == "__main__":
     try:
         path_list = os.listdir("/Users/")
-        names = ["jonas","julia","alma","maria","augusta"]
+        names = ["onas","ulia","lma","aria","ugusta"]
         names_list = [name_in_path for name_in_path in path_list for name in names if name in name_in_path]
         print("\t \t \t --------------")
         print(f"\t \t \t | hello {names_list[0]} |")
