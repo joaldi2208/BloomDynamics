@@ -1,5 +1,6 @@
 \documentclass[../Main.tex]{subfiles}
 \usepackage{hyperref}
+\usepackage{siunitx}
 \hypersetup{
     colorlinks=true,
     urlcolor=magenta
@@ -8,43 +9,29 @@
 \begin{document}
 \section{Materials and methods}
 \subsection{Glider setup}
-Two calibrated SeaExplorer sea gliders manufactured by Alseamar (France) accomplished a transect of 40km from 55.570927°N and 16.432385°E (B1) to 55.250000°N and 15.983300°E (B2) between March 5, 2021 and October 5, 2021. 
-Each glider completed around 1500 dives up to a max depth of 80 m per mission with one mission taking 20 min and covering a total distance of 300 to 400 m. 
-Mission numbers of the gliders are 18, 19, 20, 21, 24 (Mission SEA055) and 38, 39, 40, 41, 42, 43 (Mission SEA061). 
+Two calibrated SeaExplorer sea gliders manufactured by Alseamar (France) accomplished a transect of \si{40}{km} from \si{55.570927}{°N} and \si{16.432385}{°E} to \si{55.250000}{°N} and \si{15.983300}{°E} between March 5, 2021, and October 5, 2021. 
+Each glider completed around 1500 dives up to a max depth of \si{80}{m} per mission with one mission taking 20min and covering a total distance of 300 to \si{400}{m}.  
 \\ 
 Gliders were equipped with sensors measuring temperature and salinity (RBR Legato sensor), fluorescence and optical backscattering (Wetlabs ECO Puck FLBBCD - EXP sensor), dissolved oxygen (Rinko AROD-FT sensor), and photosynthetically active radiation (PAR) (Seabird OCR504i sensor). 
-The Wetlabs sensor is an active sensor emitting light at 470 nm wavelength and detecting fluorescence emission of chlorophyll at 695 nm, and phycocyanin backscattering at 650 nm. 
+The Wetlabs sensor is an active sensor emitting light at \si{470}{nm} wavelength and detecting fluorescence emission of chlorophyll at \si{695}{nm}, and phycocyanin backscattering at \si{650}{nm}. 
 It thus provides an estimation of phytoplankton concentration. 
-The Seabird OCR504i sensor measures PAR in the range between 400 to 700 nm \cite{Alseamar2020}.
+The Seabird OCR504i sensor measures PAR in the range between 400 to \si{700}{nm} \cite{Alseamar2020}.
 
 \subsection{Data and analysis}
 Glider data used in this report stems from one of the gliders. 
 Preprocessed data was made available by the supervisors of this project. 
-Preprocessing contained despiking, correcting the thermal lag on the CTD, chlorophyll quenching, vertical gridding, and daily binning. 
-\\
-We analyzed the data in Python. We calculated the potential density from absolute salinity and conservative temperature assuming a pressure of 0 dbar as reference \cite{GSW2017}.
-\\ 
+Preprocessing contained despiking, correcting the thermal lag error in the data of conductivity-temperature-depth (CTD) sensors, chlorophyll quenching, vertical gridding, and daily binning. 
 Wind speed data comes from the Climate Data Store \cite{Era5}. 
-We selected the u- and the v-components of wind at 10 m above surface as input variables and limited the data to the spatial section between 55.58°N, 16.44°E, 55.25°N and 15.98°E, and the time period between March 2021 to October 2021. 
-The u-component represents the horizontal directional wind and the v-component represents the vertical directional wind. 
-The sum of both wind vectors represents the magnitude of total wind speed at 10 m height above the surface. Based on that, the drag coefficient can be calculated. 
-Wind stress indicates the extent of energy exchange between water and air.
-Quantitatively, it can be approximated by the product of air density, total wind speed at 10 m above the surface and the drag coefficient \cite{Mehrfar2018}. Detailed mathematical operations can be seen in Appendix 1.
+We limited the data set to u- and the v-components of wind at 10 m above the surface, the spatial section between 55.58°N, 16.44°E, 55.25°N and 15.98°E, and the period between March 2021 to October 2021.
 \\
-Data and further information can be obtained on \href{https://github.com/joaldi2208/BloomDynamics}{GitHub}.
-\\
-\\
-Do we want to put the formulas in the Appendix? 
-\\
-Calculate drag coefficient $C_D$:
+We analyzed the data in Python. Using the GSW package, we calculated the potential density from salinity and temperature assuming a pressure of 0 dbar as reference \cite{GSW2017}. 
+To estimate wind stress, we considered wind speed and direction by using the vectorial wind components, u and v.
+The u-component represents the horizontal wind and the v-component the vertical wind. 
+The sum of both wind vectors $U_{10m}$ represents the total magnitude of wind speed at \si{10}{m} height above the surface. Based on that, we calculated the drag coefficient with $C_{Drag} = 0.001(1.1+0.035*U_{10m}^2)$. 
+Wind stress $\tau$ gives evidence about the extent of energy exchange between water and air.
+Mathematically, it can be approximated by the product of air density $\rho_{Air}$, the total wind speed at \si{10}{m} above the surface, and the drag coefficient with $\tau = \rho_{Air}*C_{Drag}*U_{10m}^2$ \cite{Mehrfar2018}.
 \\
 \\
-$C_D = 0.001(1.1+0.035*U_10^2)$  
-\\
-\\
-Calculate wind stress from air density $\rho_a$, total wind speed at 10 m above surface $U_10$ drag coefficient $C_D$:
-\\
-\\
-$\tau = \rho_a*C_D*U_10^2$ 
-\end{document}
+Data and further information are available on \href{https://github.com/joaldi2208/BloomDynamics}{GitHub}.
 
+\end{document}
