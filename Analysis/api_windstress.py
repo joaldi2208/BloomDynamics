@@ -1,5 +1,7 @@
 #!/usr/bin/env python
+
 import cdsapi
+
 c = cdsapi.Client()
 
 c.retrieve(
@@ -7,7 +9,9 @@ c.retrieve(
     {
         'product_type': 'reanalysis',
         'format': 'grib',
-        'variable': 'ocean_surface_stress_equivalent_10m_neutral_wind_speed',
+        'variable': [
+            '10m_u_component_of_wind', '10m_v_component_of_wind',
+        ],
         'year': '2021',
         'month': [
             '03', '04', '05',
