@@ -12,11 +12,14 @@ def wind_stress(fig, ax, wlength=21, porder=3, i=None, num_sub=2):
     # for v in ds:
     #     print("{}, {}, {}".format(v, ds[v].attrs["long_name"], ds[v].attrs["units"]))
 
-    df = ds.to_dataframe()
+    df_s = ds.to_dataframe()
+    df = df_s.groupby(df_s.valid_time).mean()
+    df["valid_time"] = df_s.valid_time.unique()
+    df["wind"] = (df.u10 + df.v10).apply(lambda x: (x**2)*1.2*(0.001*(1.1+0.035*x)))
     df = df.iloc[4:219]
-
     filtered_wind = signal.savgol_filter(df.wind,wlength,porder)
 
+        
     if i != None:
         im = ax[i].plot(df.valid_time, df.wind, "darkorange", label="Raw data")
         im = ax[i].plot(df.valid_time, filtered_wind, "navy", label=f"SG smoothed")
