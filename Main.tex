@@ -4,7 +4,7 @@
 %\usepackage{minipage}
 \usepackage{xcolor}
 \usepackage{graphicx}
-\graphicspath{{../Analysis/Images/}}
+\graphicspath{{./Analysis/Images/}}
 \usepackage{subfiles}
 \usepackage[english]{babel}
 \usepackage{todonotes}
@@ -14,6 +14,7 @@
 \usepackage[top=2cm,left=2cm,bottom=2cm,right=2cm]{geometry}
 \usepackage{times}
 \usepackage{multicol}
+\raggedcolumns
 %\usepackage[backend=biber,stye=numeric,sorting=none]{biblatex}
 %\addbibresource{References.bib}
 
@@ -25,13 +26,14 @@
 \maketitle
 
 \subfile{Sections/Abstract}
-% %test\cite{Cauchy20182305}
+\begin{multicols}{2}
+% test\cite{Cauchy20182305}
 % \subfile{Sections/Introduction}
-% \subfile{Sections/MaterialsAndMethods}
-% \subfile{Sections/Result}
-% \subfile{Sections/Discussion}
+\subfile{Sections/MaterialsAndMethods}
+\subfile{Sections/Result}
+\subfile{Sections/Discussion}
 % \subfile{Sections/Conclusion}
-
+\end{multicols}
 %\printbibliography
 
 %\subfile{Sections/Appendix}

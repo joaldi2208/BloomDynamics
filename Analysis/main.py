@@ -56,7 +56,7 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
 
 
 def figure_layout(answer):
-    values_to_label = {"density":"Density [g/cm$^3$]", "chloro":"Chlorophyll [mg/L]", "temp":"Temperatur [$^\circ$C]", "par":"Ph. Active Radiation [PPF]", "sal":"Salinity [g/kg]", "wind":"Wind Stress [Pa]"}
+    values_to_label = {"density":"Density [kg/m$^3$]", "chloro":"Chlorophyll [$\mu q$/L]", "temp":"Temperatur [$^\circ$C]", "par":"Photo. Active \n Radiation \n [$\mu q/cm² nm¹$]", "sal":"Salinity PSU", "wind":"Wind Stress [Pa]"}
     print("******************************** \n")
     for name_pair in values_to_label.items():
         print(f"{name_pair[0]} --> {name_pair[1]}")
@@ -111,7 +111,7 @@ if __name__ == "__main__":
         print("\t \t \t --------------")
         print(f"\t \t \t | hello {names_list[0]} |")
         print("\t \t \t --------------")
-    except IndexError:
+    except IndexError and FileNotFoundError:
         print("\t \t \t --------------")
         print("\t \t \t | hello |")
         print("\t \t \t --------------")
