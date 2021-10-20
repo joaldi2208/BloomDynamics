@@ -1,40 +1,63 @@
 \documentclass{article}
-
 \usepackage{tcolorbox}
-%\usepackage{minipage}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
 \graphicspath{{./Analysis/Images/}}
 \usepackage{subfiles}
 \usepackage[english]{babel}
 \usepackage{todonotes}
 \usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=magenta
+    }
 \usepackage{siunitx}
+\usepackage{float}    
 \usepackage{booktabs}
 \usepackage[top=2cm,left=2cm,bottom=2cm,right=2cm]{geometry}
 \usepackage{times}
-\usepackage{multicol}
+\usepackage{multicol, caption}
+
+\usepackage{titlesec} % required package for \titleformat
+\titleformat*{\subsection}{\normalsize\bfseries} % size and style of the subsections
+\usepackage[font=footnotesize,labelfont=bf]{caption} % size and style of the captions
+
 \raggedcolumns
-%\usepackage[backend=biber,stye=numeric,sorting=none]{biblatex}
-%\addbibresource{References.bib}
+%\bibliography{References}
+\usepackage{csquotes}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{References.bib}
 
 \definecolor{light-orange}{cmyk}{0,0.06,0.12,0.02}
 \title{Observations of bloom dynamics in the Bornholm Basin from gliders}
 \author{Jonas Dietrich, Alma Holmsten, Augusta Olsson, Marie Wicklander, Julia Mari Murata}
 \date{\today}
+
 \begin{document}
 \maketitle
 
+
 \subfile{Sections/Abstract}
 \begin{multicols}{2}
-% test\cite{Cauchy20182305}
-% \subfile{Sections/Introduction}
+\subfile{Sections/Introduction}
 \subfile{Sections/MaterialsAndMethods}
 \subfile{Sections/Result}
-\subfile{Sections/Discussion}
-% \subfile{Sections/Conclusion}
 \end{multicols}
-%\printbibliography
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{All_Properties.png}
+  \caption{All properties}
+  \label{fig:all}
+\end{figure}
+
+\begin{multicols}{2}
+\subfile{Sections/Discussion}
+\subfile{Sections/Conclusion}
+\printbibliography
+\end{multicols}
+
 
 %\subfile{Sections/Appendix}
 
