@@ -7,6 +7,7 @@ import gsw
 import random
 import os
 
+
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 from windstress_plot import wind_stress
@@ -24,12 +25,35 @@ time = pd.read_csv("Data/time.csv", names=["time"],
 chloro = pd.read_csv("Data/chlorophyll.csv", names=["chloro"],
                    converters = {"chloro":lambda x:[float(i) for i in x.split(";")]})
 
+
 all_props = sal.join([par,pressure,temp,time,chloro])
 
+all_props["log_par"] = ""
+all_props["log_chloro"] = ""
 all_props["density"] = ""
 for i in range(len(all_props.sal)):
     all_props["density"][i] = gsw.sigma0(all_props.sal[i],all_props.temp[i])
+    # print(all_props.chloro[i])
+    # nan's zu 100 um später zu löschen
+    # log_chloro
+    no_nan_chloro = np.nan_to_num(all_props.chloro[i], nan=100)
+    # negative werte zu eins damit sie 0 werden
+    no_nan_chloro = np.where(no_nan_chloro<=0, 1000, no_nan_chloro)
+    log_values_chloro = np.log(no_nan_chloro)
+    #print(no_nan_chloro)
+    #print(log_values_chloro)
+    log_values_chloro = np.where(log_values_chloro==np.log(1000), np.nan, log_values_chloro)
+    all_props["log_chloro"][i] = np.where(log_values_chloro==np.log(100), np.nan, log_values_chloro)
 
+    # log_par
+    no_nan_par = np.nan_to_num(all_props.par[i], nan=10000)
+    no_nan_par = np.where(no_nan_par<=0, 100000, no_nan_par)
+    log_values_par = np.log(no_nan_par)
+    log_values_par = np.where(log_values_par==np.log(100000), np.nan, log_values_par)
+    all_props["log_par"][i] = np.where(log_values_par==np.log(10000), np.nan, log_values_par)
+
+
+    
 def create_figure(x_values, y_values, color_values, colormap, values_to_label, i, num_sub):
     '''creates a HEATMAP for sal, par, temp, pressure or density. The date is
     plotted on the pressure is plotted on the y-axis.'''
@@ -56,7 +80,7 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
 
 
 def figure_layout(answer):
-    values_to_label = {"density":"Density [kg/m$^3$]", "chloro":"Chlorophyll [$\mu q$/L]", "temp":"Temperatur [$^\circ$C]", "par":"Photo. Active \n Radiation \n [$\mu q/cm² nm¹$]", "sal":"Salinity PSU", "wind":"Wind Stress [Pa]"}
+    values_to_label = {"density":"Density [kg/m$^3$]", "chloro":"Chlorophyll [$\mu q$/L]", "temp":"Temperatur [$^\circ$C]", "par":"Photo. Active \n Radiation \n [$\mu q/cm² nm¹$]", "sal":"Salinity PSU", "wind":"Wind Stress [Pa]","log_par":"log PAR[$\mu q/cm² nm¹$]","log_chloro":"Chlorophyll log [$\mu q$/L]"}
     print("******************************** \n")
     for name_pair in values_to_label.items():
         print(f"{name_pair[0]} --> {name_pair[1]}")

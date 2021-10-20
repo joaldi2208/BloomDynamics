@@ -9,21 +9,21 @@ Each glider completed around 1500 dives up to a max depth of \SI{80}{m} per miss
 Gliders were equipped with sensors measuring temperature and salinity (RBR Legato sensor), fluorescence and optical backscattering (Wetlabs ECO Puck FLBBCD - EXP sensor), dissolved oxygen (Rinko AROD-FT sensor), and photosynthetically active radiation (PAR) (Seabird OCR504i sensor). 
 The Wetlabs sensor is an active sensor emitting light at \SI{470}{nm} wavelength and detecting fluorescence emission of chlorophyll at \SI{695}{nm}, and phycocyanin backscattering at \SI{650}{nm}. 
 It thus provides an estimation of phytoplankton concentration. 
-The Seabird OCR504i sensor measures PAR in the range between 400 to \SI{700}{nm}%\supercite{Alseamar2020}.
+The Seabird OCR504i sensor measures PAR in the range between 400 to \SI{700}{nm}\supercite{ACSA2014}.
 
 \subsection*{\crule[blue]{.2cm}{.2cm} Data and analysis}
 Glider data used in this report stems from one of the gliders. 
 Preprocessed data was made available by the supervisors of this project. 
 Preprocessing contained despiking, correcting the thermal lag error in the data of conductivity-temperature-depth (CTD) sensors, chlorophyll quenching, vertical gridding, and daily binning. 
-Wind speed data comes from the Climate Data Store%\supercite{Era5}. 
+Wind speed data comes from the Climate Data Store\supercite{era}. 
 We limited the data set to u- and the v-components of wind at 10 m above the surface, the spatial section between 55.58°N, 16.44°E, 55.25°N and 15.98°E, and the period between March 2021 to October 2021.
 \\
-We analyzed the data in Python. Using the GSW package, we calculated the potential density from salinity and temperature assuming a pressure of 0 dbar as reference%\supercite{GSW2017}. 
+We analyzed the data in Python. Using the GSW package, we calculated the potential density from salinity and temperature assuming a pressure of 0 dbar as reference\supercite{gsw}. 
 To estimate wind stress, we considered wind speed and direction by using the vectorial wind components, u and v.
 The u-component represents the horizontal wind and the v-component the vertical wind. 
 The sum of both wind vectors $U_{10m}$ represents the total magnitude of wind speed at \SI{10}{m} height above the surface. Based on that, we calculated the drag coefficient with $C_{Drag} = 0.001(1.1+0.035*U_{10m}^2)$. 
 Wind stress $\tau$ gives evidence about the extent of energy exchange between water and air.
-Mathematically, it can be approximated by the product of air density $\rho_{Air}$, the total wind speed at \SI{10}{m} above the surface, and the drag coefficient with $\tau = \rho_{Air}*C_{Drag}*U_{10m}^2$%\supercite{Mehrfar2018}.
+Mathematically, it can be approximated by the product of air density $\rho_{Air}$, the total wind speed at \SI{10}{m} above the surface, and the drag coefficient with $\tau = \rho_{Air}*C_{Drag}*U_{10m}^2$\supercite{Mehrfar2018}.
 \\
 Data and further information are available on \href{https://github.com/joaldi2208/BloomDynamics}{GitHub}.
 
