@@ -6,7 +6,7 @@ import numpy as np
 import gsw
 import random
 import os
-import matplotlib
+import matplotlib.colors as colors
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
@@ -42,7 +42,6 @@ all_props["density"] = ""
 for i in range(len(all_props.sal)):
     all_props["density"][i] = gsw.sigma0(all_props.sal[i],all_props.temp[i])
 
-    
 def create_figure(x_values, y_values, color_values, colormap, values_to_label, i, num_sub,log):
     '''creates a HEATMAP for sal, par, temp, pressure or density. The date is
     plotted on the pressure is plotted on the y-axis.'''
@@ -52,9 +51,10 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
     y_axis_values = np.array([y_axis_values])[0,:]
     if i == None:
         if log == "log":
-            plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}",norm=matplotlib.colors.LogNorm(), shading="auto")
+            plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}",norm=colors.LogNorm(), shading="auto")
         else:
-            plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto")
+            plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
+                    norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),15),ncolors=256))
 
         ax.invert_yaxis()
         plt.colorbar(plot,label=values_to_label[color_values])
@@ -62,9 +62,10 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
         plt.xlabel("Time [d]")
     else:
         if log == "log":
-            plot = ax[i].contourf(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", norm=matplotlib.colors.LogNorm(), shading="auto")
+            plot = ax[i].contourf(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", norm=colors.LogNorm(), shading="auto")
         else:
-            plot = ax[i].contourf(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto")
+            plot = ax[i].contourf(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
+                    norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),15),ncolors=256))
 
         ax[i].invert_yaxis()
         divider = make_axes_locatable(ax[i])
