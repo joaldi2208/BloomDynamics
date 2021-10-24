@@ -26,7 +26,7 @@ def wind_stress(fig, ax, wlength=21, porder=3, i=None, num_sub=2):
         divider = make_axes_locatable(ax[i])
         cax = divider.append_axes("right", size="3%", pad=0.5)
         cax.axis("off")
-        ax[i].set_ylabel("Wind Stress [Pa]")
+        ax[i].set_ylabel("Wind Stress \n [N/m$^2$]", fontsize=13)
         ax[i].set_xlim(df.valid_time[1], df.valid_time[-1])
         ticks = None if num_sub-1 == i else ax[i].set_xticks([])
         ax[i].legend()
@@ -34,7 +34,7 @@ def wind_stress(fig, ax, wlength=21, porder=3, i=None, num_sub=2):
         im = ax.plot(df.valid_time, df.wind, "darkorange", label="Raw data")
         im = ax.plot(df.valid_time, filtered_wind, "navy", label=f"SG smoothed")
         ax.set_xlabel("Days [d]")
-        ax.set_ylabel("Wind Stress [Pa]")
+        ax.set_ylabel("Wind Stress \n [N/m$^2$]", fontsize=13)
         ax.set_xlim(df.valid_time[1], df.valid_time[-1])
         plt.legend()
     return im

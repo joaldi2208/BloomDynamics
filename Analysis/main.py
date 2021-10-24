@@ -49,25 +49,26 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
     x_axis_values = x_values[0]
     y_axis_values = [i[0] for i in y_values]
     y_axis_values = np.array([y_axis_values])[0,:]
+
     if i == None:
         if log == "log":
             plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}",norm=colors.LogNorm(), shading="auto")
         else:
             plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
-                    norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),15),ncolors=256))
+                    norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),11),ncolors=256))
 
         ax.invert_yaxis()
         #plt.colorbar(plot,label=values_to_label[color_values])
         cb = plt.colorbar(plot)
         cb.set_label(label=values_to_label[color_values], size="x-large")
-        plt.ylabel("Pressure [dbar]", fontsize=15)
+        plt.ylabel("Pressure \n [dbar]", fontsize=15)
         plt.xlabel("Time [d]", fontsize=15)
     else:
         if log == "log":
-            plot = ax[i].contourf(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", norm=colors.LogNorm(), shading="auto")
+            plot = ax[i].pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", norm=colors.LogNorm(),shading="auto")
         else:
-            plot = ax[i].contourf(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
-                    norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),15),ncolors=256))
+            plot = ax[i].pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
+                    norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),11),ncolors=256))
 
         ax[i].invert_yaxis()
         divider = make_axes_locatable(ax[i])
@@ -76,13 +77,13 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
         cb = plt.colorbar(plot, cax=cax, ax=ax[i])
         cb.set_label(label=values_to_label[color_values], size="x-large")
         ticks = None if num_sub-1 == i else ax[i].set_xticks([])
-        ax[i].set_ylabel("Pressure [dbar]", fontsize=15)
+        ax[i].set_ylabel("Pressure \n [dbar]", fontsize=15)
     
     
 
 
 def figure_layout(answer):
-    values_to_label = {"density":"Density [kg/m$^3$]", "chloro":"Chlorophyll [$\mu q$/L]", "temp":"Temperatur [$^\circ$C]", "par":"PAR [$\mu q/cm² nm¹$]", "sal":"Salinity PSU", "wind":"Wind Stress [Pa]","par log":"PAR [$\mu q/cm² nm¹$]","chloro log":"Chlorophyll [$\mu g$/L]"}
+    values_to_label = {"density":"Density \n [kg/m$^3$]", "chloro":"Chlorophyll \n [$\mu q$/L]", "temp":"Temperatur \n [$^\circ$C]", "par":"PAR \n [$\mu q/cm² nm¹$]", "sal":"Salinity \n PSU", "wind":"Wind Stress \n [Pa]","par log":"PAR \n [$\mu q/cm² nm¹$]","chloro \n log":"Chlorophyll [$\mu g$/L]"}
     print("******************************** \n")
     for name_pair in values_to_label.items():
         print(f"{name_pair[0]} --> {name_pair[1]}")
