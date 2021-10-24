@@ -57,9 +57,11 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
                     norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),15),ncolors=256))
 
         ax.invert_yaxis()
-        plt.colorbar(plot,label=values_to_label[color_values])
-        plt.ylabel("Pressure [dbar]")
-        plt.xlabel("Time [d]")
+        #plt.colorbar(plot,label=values_to_label[color_values])
+        cb = plt.colorbar(plot)
+        cb.set_label(label=values_to_label[color_values], size="x-large")
+        plt.ylabel("Pressure [dbar]", fontsize=15)
+        plt.xlabel("Time [d]", fontsize=15)
     else:
         if log == "log":
             plot = ax[i].contourf(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", norm=colors.LogNorm(), shading="auto")
@@ -70,9 +72,11 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
         ax[i].invert_yaxis()
         divider = make_axes_locatable(ax[i])
         cax = divider.append_axes("right", size="3%", pad=0.5)
-        fig.colorbar(plot, cax=cax, ax=ax[i], label=values_to_label[color_values], orientation="vertical")
+        #fig.colorbar(plot, cax=cax, ax=ax[i], label=values_to_label[color_values], orientation="vertical")
+        cb = plt.colorbar(plot, cax=cax, ax=ax[i])
+        cb.set_label(label=values_to_label[color_values], size="x-large")
         ticks = None if num_sub-1 == i else ax[i].set_xticks([])
-        ax[i].set_ylabel("Pressure [dbar]")
+        ax[i].set_ylabel("Pressure [dbar]", fontsize=15)
     
     
 
@@ -102,7 +106,7 @@ def figure_layout(answer):
                 pass
             else:    
                 create_figure(all_props["pressure"].values, all_props["time"].values, variable, colormap, values_to_label, i, num_sub, log)
-        ax[i].set_xlabel("Time [d]")
+        ax[i].set_xlabel("Time [d]",fontsize=15)
         plt.show()
 
     
