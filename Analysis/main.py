@@ -100,9 +100,14 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
     if i == None:
         if log == "log":
             plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}",norm=colors.LogNorm(), shading="auto")
+            cb = plt.colorbar(plot)
         else:
             plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
                     norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),50),ncolors=256))
+            cb = plt.colorbar(plot)
+            cb.set_ticks(np.arange(int(np.nanmin(stacked_color_values)),
+                int(np.nanmax(stacked_color_values)*1.1),
+                2))
         if log == "layers":
             mldr_plot = ax.plot(y_axis_values, mld, "dimgrey", label="MLD")
             ezd_plot = ax.plot(y_axis_values, ezd, "k", label="EZD")
@@ -110,26 +115,31 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
 
         ax.invert_yaxis()
         #plt.colorbar(plot,label=values_to_label[color_values])
-        cb = plt.colorbar(plot)
         cb.set_label(label=values_to_label[color_values], size="x-large")
         plt.ylabel("Pressure \n [dbar]", fontsize=15)
         plt.xlabel("Time [d]", fontsize=15)
     else:
         if log == "log":
             plot = ax[i].pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", norm=colors.LogNorm(),shading="auto")
+            divider = make_axes_locatable(ax[i])
+            cax = divider.append_axes("right", size="3%", pad=0.5)
+            cb = plt.colorbar(plot, cax=cax, ax=ax[i])
         else:
             plot = ax[i].pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
                     norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),50),ncolors=256))
+            divider = make_axes_locatable(ax[i])
+            cax = divider.append_axes("right", size="3%", pad=0.5)
+            cb = plt.colorbar(plot, cax=cax, ax=ax[i])
+            cb.set_ticks(np.arange(int(np.nanmin(stacked_color_values)),
+                int(np.nanmax(stacked_color_values)*1.1),
+                2))
         if log == "layers":
             mldr_plot = ax[i].plot(y_axis_values, mld, "dimgrey", label="MLD")
             ezd_plot = ax[i].plot(y_axis_values, ezd, "k", label="EZD")
             legend = ax[i].legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,ncol=2, mode="expand", borderaxespad=0.)
             #legend.get_frame().set_facecolor('C0')
         ax[i].invert_yaxis()
-        divider = make_axes_locatable(ax[i])
-        cax = divider.append_axes("right", size="3%", pad=0.5)
         #fig.colorbar(plot, cax=cax, ax=ax[i], label=values_to_label[color_values], orientation="vertical")
-        cb = plt.colorbar(plot, cax=cax, ax=ax[i])
         cb.set_label(label=values_to_label[color_values], size="x-large")
         ticks = None if num_sub-1 == i else ax[i].set_xticks([])
         ax[i].set_ylabel("Pressure \n [dbar]", fontsize=15)
