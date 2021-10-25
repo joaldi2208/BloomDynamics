@@ -37,10 +37,57 @@ chloro = pd.read_csv("Data/chlorophyll.csv", names=["chloro"],
 
 all_props = sal.join([par,pressure,temp,time,chloro])
 
-
+# density column
 all_props["density"] = ""
+all_props["nsquared"] = ""
 for i in range(len(all_props.sal)):
     all_props["density"][i] = gsw.sigma0(all_props.sal[i],all_props.temp[i])
+    all_props["nsquared"][i] = gsw.Nsquared(all_props.sal[i],all_props.temp[i],all_props.pressure[i])
+
+
+all_props["nsquared1"] = ""
+all_props["nsquared2"] = ""
+for i in range(len(all_props.nsquared)):
+    all_props["nsquared1"][i] = all_props.nsquared[i][0]
+    all_props["nsquared2"][i] = all_props.nsquared[i][1]
+
+# Nsquare
+# def nsquared():
+
+
+# mixed layer depth calculation
+# mixed_layer_depth_calculation():
+mld_list = []
+for index, value_list in enumerate(all_props.density):
+    one_date_list = []
+    for index2, value in enumerate(value_list):
+        if all_props.pressure[index][index2] < 4:
+            one_date_list.append(value)
+    mld_list.append(np.nanmean(one_date_list)+0.125)
+
+mld = []
+for index, value_list in enumerate(all_props.pressure):
+    one_date_list = []
+    for index2, value in enumerate(value_list):
+        if all_props.density[index][index2] < mld_list[index]:
+            one_date_list.append(value)
+    try:
+        mld.append(np.nanmax(one_date_list))
+    except ValueError:
+        mld.append(np.nan) 
+            
+# euphotic depth calculation
+# euphotic_deph_calculation():
+ezd = []
+for value_list in all_props.par:
+    try:
+        max_value = np.nanmax(value_list)
+        ezd.append(max_value*0.01)
+    except ValueError:
+        ezd.append(np.nan)
+        
+# functions
+
 
 def create_figure(x_values, y_values, color_values, colormap, values_to_label, i, num_sub,log):
     '''creates a HEATMAP for sal, par, temp, pressure or density. The date is
@@ -55,7 +102,11 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
             plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}",norm=colors.LogNorm(), shading="auto")
         else:
             plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
-                    norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),11),ncolors=256))
+                    norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),50),ncolors=256))
+        if log == "layers":
+            mldr_plot = ax.plot(y_axis_values, mld, "dimgrey", label="MLD")
+            ezd_plot = ax.plot(y_axis_values, ezd, "k", label="EZD")
+            legend = ax.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,ncol=2, mode="expand", borderaxespad=0.)
 
         ax.invert_yaxis()
         #plt.colorbar(plot,label=values_to_label[color_values])
@@ -68,8 +119,12 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
             plot = ax[i].pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", norm=colors.LogNorm(),shading="auto")
         else:
             plot = ax[i].pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
-                    norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),11),ncolors=256))
-
+                    norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),50),ncolors=256))
+        if log == "layers":
+            mldr_plot = ax[i].plot(y_axis_values, mld, "dimgrey", label="MLD")
+            ezd_plot = ax[i].plot(y_axis_values, ezd, "k", label="EZD")
+            legend = ax[i].legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,ncol=2, mode="expand", borderaxespad=0.)
+            #legend.get_frame().set_facecolor('C0')
         ax[i].invert_yaxis()
         divider = make_axes_locatable(ax[i])
         cax = divider.append_axes("right", size="3%", pad=0.5)
@@ -83,7 +138,7 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
 
 
 def figure_layout(answer):
-    values_to_label = {"density":"Density \n [kg/m$^3$]", "chloro":"Chlorophyll \n [$\mu q$/L]", "temp":"Temperatur \n [$^\circ$C]", "par":"PAR \n [$\mu q/cm² nm¹$]", "sal":"Salinity \n PSU", "wind":"Wind Stress \n [Pa]","par log":"PAR \n [$\mu q/cm² nm¹$]","chloro \n log":"Chlorophyll [$\mu g$/L]"}
+    values_to_label = {"density":"Density \n [kg/m$^3$]", "chloro":"Chlorophyll \n [$\mu q$/L]", "temp":"Temperatur \n [$^\circ$C]", "par":"PAR \n [$\mu q/cm² nm¹$]", "sal":"Salinity \n PSU", "wind":"Wind Stress \n [Pa]","par log":"PAR \n [$\mu q/cm² nm¹$]","chloro \n log":"Chlorophyll [$\mu g$/L]","nsquared1": "N$^2$"}
     print("******************************** \n")
     for name_pair in values_to_label.items():
         print(f"{name_pair[0]} --> {name_pair[1]}")

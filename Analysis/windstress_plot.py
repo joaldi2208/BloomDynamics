@@ -4,6 +4,7 @@ import pandas as pd
 import xarray as xr
 import matplotlib.pyplot as plt
 from scipy import signal
+import numpy as np
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
@@ -15,7 +16,7 @@ def wind_stress(fig, ax, wlength=21, porder=3, i=None, num_sub=2):
     df_s = ds.to_dataframe()
     df = df_s.groupby(df_s.valid_time).mean()
     df["valid_time"] = df_s.valid_time.unique()
-    df["wind"] = (df.u10 + df.v10).apply(lambda x: (x**2)*1.2*(0.001*(1.1+0.035*x)))
+    df["wind"] = (df.u10**2 + df.v10**2).apply(lambda x: x*1.2*(0.001*(1.1+0.035*np.sqrt(x))))
     df = df.iloc[4:219]
     filtered_wind = signal.savgol_filter(df.wind,wlength,porder)
 
