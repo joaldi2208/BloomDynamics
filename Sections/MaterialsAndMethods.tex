@@ -3,37 +3,40 @@
 \begin{document}
 \section*{\crule[blue]{.3cm}{.3cm} Materials and methods}
 \subsection*{\crule[blue]{.2cm}{.2cm} Glider setup}
-Two calibrated SeaExplorer sea gliders manufactured by Alseamar (France) accomplished a transect of \SI{40}{km} from \SI{55.570927}{\degree}N and \SI{16.432385}{\degree}E to \SI{55.250000}{\degree}N and \SI{15.983300}{\degree}E between March 5, 2021, and October 5, 2021. 
-Each glider completed around 1500 dives up to a max depth of \SI{80}{m} per missoon with one mission taking 20min and covering a total distance of \SIrange{300}{400}{m}. 
+Two SeaExplorer gliders manufactured by Alseamar (France) completed a transect of \SI{40}{km} from \SI{55.57}{\degree}N and \SI{16.43}{\degree}E to \SI{55.25}{\degree}N and \SI{15.98}{\degree}E between March 5, 2021, and October 5, 2021. 
+Each glider performed around 1500 dives up to a maximum depth of \SI{80}{m} per mission. 
+Every dive took 20min and covered a horizontal distance of \SIrange{300}{400}{m}. 
 
 \\ 
-Gliders were equipped with sensors measuring temperature and salinity (RBR Legato sensor), fluorescence and optical backscattering (Wetlabs ECO Puck FLBBCD - EXP sensor), dissolved oxygen (Rinko AROD-FT sensor), and photosynthetically active radiation (PAR) (Seabird OCR504i sensor). 
-The Wetlabs sensor is an active sensor emitting light at \SI{470}{nm} wavelength and detecting fluorescence emission of chlorophyll at \SI{695}{nm}, and phycocyanin backscattering at \SI{650}{nm}. 
+Gliders were equipped with sensors measuring temperature and salinity (RBR Legato sensor), fluorescence (Wetlabs ECO Puck FLBBCD - EXP sensor), and \emph{photosynthetically active radiation} (PAR) (Seabird OCR504i sensor). 
+The Wetlabs sensor emits light at \SI{470}{nm} wavelength, and detects fluorescence emission of chlorophyll at \SI{695}{nm}, and phycocyanin. 
 The Seabird OCR504i sensor measures PAR in the range between 400 to \SI{700}{nm}\supercite{ACSA2014}.
 
-\subsection*{\crule[blue]{.2cm}{.2cm} Data and analysis}
-Glider data used in this report stems from one of the gliders. 
-Preprocessed data was made available by the supervisors of this project. 
-Preprocessing contained despiking (i.e., reducing noise), correcting the thermal lag error in the data of the glider's conductivity-temperature-depth (CTD) sensors, correcting fluorescence quenching, vertical gridding by depth, and daily binning.
-The thermal lag error arises from spatial and temporal discrepancies between the temperature and conductivity measurements\supercite{Garau2011}.
-To accurately derive density from both variables, mismatches were corrected by considering glider speed, upcast as well as downcast data, and reference measurements from the ship's CTD. 
-Estimations of phytoplankton abundance from chlorophyll concentration are affected by chlorophyll fluorescence quenching. 
-It results from variations in light exposure (i.e., depth dependent and diurnal light availability), and associated physiological compensation\supercite{Thomalla2018}. 
-To assess fluorescence quenching, profiles of maximum and minimum fluorescence were created.
+\subsection*{\crule[blue]{.2cm}{.2cm} Data}
+Preprocessed data was made available by the supervisors of this project. Preprocessing comprised the correction of the thermal lag error in the data of the glider's conductivity-temperature-depth (CTD) sensors.
+The thermal lag error results from spatial and temporal discrepancies between temperature and conductivity measurements\supercite{Garau2011}.
 
 \\
 Wind speed data comes from the Climate Data Store\supercite{era}. 
-We limited the data set to u- and the v-components of wind at \SI{10}{m}above the surface, the spatial section between \SI{55.58}{\degree}N, \SI{16.44}{\degree}E, \SI{55.25}{\degree}N and \SI{15.9}{\degree}E, and the period between March 2021 to October 2021.
+To estimate wind stress, we selected the $u$- and the $v$-components of wind at \SI{10}{m}above the surface. 
+The $u$-component represents the east wind direction and the $v$-component the north wind direction\supercite{era2}. 
+We further limited the data set to the spatial section between \SI{55.58}{\degree}N, \SI{16.44}{\degree}E, \SI{55.25}{\degree}N and \SI{15.90}{\degree}E, and the period between March 2021 to October 2021. 
+
+\subsection*{\crule[blue]{.2cm}{.2cm} Analysis}
+We analyzed the data in Python. 
+Using the GSW package, we calculated the potential density from salinity and temperature assuming a pressure of 0 dbar as reference\supercite{gsw}. 
+Total wind speed at \SI{10}{m} height above the surface $U_{10m}$ can be evaluated as $U_{10m}$ = $\sqrt[]{u^2 + v^2}$. 
+According to Mehrfar et al. (2018)\supercite{Mehrfar2018}, we calculated the drag coefficient with $C_{Drag} = 0.001\cdot1.2\cdot  (1.1+0.035\cdot U_{10m})$. 
+Wind stress $\tau$ acts as proxy for turbulent energy exchange between water and air.
+Mathematically, it can be approximated by the product of air density $\rho_{Air}$, the total wind speed at \SI{10}{m} above the surface, and the drag coefficient with $\tau = \rho_{Air}\cdot C_{Drag}\cdot U_{10m}^2$\supercite{Mehrfar2018}.
 
 \\
-We analyzed the data in Python. Using the GSW package, we calculated the potential density from salinity and temperature assuming a pressure of 0 dbar as reference\supercite{gsw}. 
-To estimate wind stress, we considered wind speed and direction by using the vectorial wind components, u and v.
-The u-component represents the horizontal wind and the v-component the vertical wind. 
-Summing both wind vectors $U_{10m}$ indicates the total magnitude of wind speed at \SI{10}{m} height above the surface. Based on that, we calculated the drag coefficient with $C_{Drag} = 0.001(1.1+0.035*U_{10m}^2)$. 
-Wind stress $\tau$ acts as proxy for the extent of energy exchange between water and air.
-Mathematically, it can be approximated by the product of air density $\rho_{Air}$, the total wind speed at \SI{10}{m} above the surface, and the drag coefficient with $\tau = \rho_{Air}*C_{Drag}*U_{10m}^2$\supercite{Mehrfar2018}.
-
+To improve the interpretability of chlorophyll and PAR, we log-transformed the data.
+We estimated the EZD in depth where PAR equates to \SI{1}{\%} of the surface value\supercite{Lee2007}.
+To assess MLD, we defined a density threshold criterion of $\SI{0.125}{kg/m^3}$ following Suga et al. (2004)\supercite{Suga2004}, and limited the data to a pressure higher than \SI{4}{dbar}. 
+\\
 \\
 Data and further information are available on \href{https://github.com/joaldi2208/BloomDynamics}{GitHub}.
 
 \end{document}
+
