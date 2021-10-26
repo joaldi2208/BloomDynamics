@@ -109,8 +109,8 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
                 int(np.nanmax(stacked_color_values)*1.1),
                 2))
         if log == "layers":
-            mldr_plot = ax.plot(y_axis_values, mld, "dimgrey", label="MLD")
-            ezd_plot = ax.plot(y_axis_values, ezd, "k", label="EZD")
+            mldr_plot = ax.plot(y_axis_values, mld, "navy", label="MLD", linewidth=0.5)
+            ezd_plot = ax.plot(y_axis_values, ezd, "maroon", label="EZD", linewidth=0.5)
             legend = ax.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,ncol=2, mode="expand", borderaxespad=0.)
 
         ax.invert_yaxis()
@@ -134,8 +134,8 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
                 int(np.nanmax(stacked_color_values)*1.1),
                 2))
         if log == "layers":
-            mldr_plot = ax[i].plot(y_axis_values, mld, "dimgrey", label="MLD")
-            ezd_plot = ax[i].plot(y_axis_values, ezd, "k", label="EZD")
+            mldr_plot = ax[i].plot(y_axis_values, mld, "navy", label="MLD", linewidth=0.5)
+            ezd_plot = ax[i].plot(y_axis_values, ezd, "maroon", label="EZD", linewidth=0.5)
             legend = ax[i].legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,ncol=2, mode="expand", borderaxespad=0.)
             #legend.get_frame().set_facecolor('C0')
         ax[i].invert_yaxis()
