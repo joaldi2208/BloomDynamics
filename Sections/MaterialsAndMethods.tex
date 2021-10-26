@@ -8,35 +8,37 @@ Each glider performed around 1500 dives up to a maximum depth of \SI{80}{m} per 
 Every dive took 20min and covered a horizontal distance of \SIrange{300}{400}{m}. 
 
 \\ 
-Gliders were equipped with sensors measuring temperature and salinity (RBR Legato sensor), fluorescence (Wetlabs ECO Puck FLBBCD - EXP sensor), and \emph{photosynthetically active radiation} (PAR) (Seabird OCR504i sensor). 
-The Wetlabs sensor emits light at \SI{470}{nm} wavelength, and detects fluorescence emission of chlorophyll at \SI{695}{nm}, and phycocyanin. 
+Gliders were equipped with sensors measuring \emph{conductivity-temperature-depth} (CTD) (RBR Legato sensor), fluorescence (Wetlabs ECO Puck FLBBCD - EXP sensor), and \emph{photosynthetically active radiation} (PAR) (Seabird OCR504i sensor). 
+The Wetlabs sensor emits light at \SI{470}{nm} wavelength and detects fluorescence emission of chlorophyll at \SI{695}{nm}. 
 The Seabird OCR504i sensor measures PAR in the range between 400 to \SI{700}{nm}\supercite{ACSA2014}.
 
 \subsection*{\crule[blue]{.2cm}{.2cm} Data}
-Preprocessed data was made available by the supervisors of this project. Preprocessing comprised the correction of the thermal lag error in the data of the glider's conductivity-temperature-depth (CTD) sensors.
-The thermal lag error results from spatial and temporal discrepancies between temperature and conductivity measurements\supercite{Garau2011}.
+Preprocessed glider data was made available by the supervisors of this project. Preprocessing comprised the correction of the thermal lag error in the CTD data.
+Discrepancies in time and space between temperature and conductivity measurements result from the sensor arrangement\supercite{Garau2011}.
 
 \\
 Wind speed data comes from the Climate Data Store\supercite{era}. 
-To estimate wind stress, we selected the $u$- and the $v$-components of wind at \SI{10}{m}above the surface. 
+To estimate wind stress, we selected the $u$- and the $v$-component of wind at \SI{10}{m} above the surface. 
 The $u$-component represents the east wind direction and the $v$-component the north wind direction\supercite{era2}. 
 We further limited the data set to the spatial section between \SI{55.58}{\degree}N, \SI{16.44}{\degree}E, \SI{55.25}{\degree}N and \SI{15.90}{\degree}E, and the period between March 2021 to October 2021. 
 
 \subsection*{\crule[blue]{.2cm}{.2cm} Analysis}
-We analyzed the data in Python. 
-Using the GSW package, we calculated the potential density from salinity and temperature, and $N^2$\supercite{gsw}. 
+We analyzed the data in Python.
+To improve the visual interpretability, we log-transformed the data of chlorophyll and PAR.
+
+\\
+Using the GSW package, we calculated the potential density from salinity and temperature, and $N^2$ by additionally considering pressure\supercite{gsw}. 
 Total wind speed at \SI{10}{m} height above the surface $U_{10m}$ can be evaluated as $U_{10m}$ = $\sqrt[]{u^2 + v^2}$. 
-According to Mehrfar et al. (2018)\supercite{Mehrfar2018}, we calculated the drag coefficient with $C_{Drag} = 0.001\cdot1.2\cdot  (1.1+0.035\cdot U_{10m})$. 
-Wind stress $\tau$ acts as proxy for turbulent energy exchange between water and air.
+Following Mehrfar et al. (2018), we calculated the drag coefficient with $C_{Drag} = 0.001\cdot1.2\cdot  (1.1+0.035\cdot U_{10m})$. 
+Wind stress $\tau$ acts as a proxy for turbulent energy exchange between water and air.
 Mathematically, it can be approximated by the product of air density $\rho_{Air}$, the total wind speed at \SI{10}{m} above the surface, and the drag coefficient with $\tau = \rho_{Air}\cdot C_{Drag}\cdot U_{10m}^2$\supercite{Mehrfar2018}.
 
 \\
-To improve the interpretability of chlorophyll and PAR, we log-transformed the data.
-We estimated the EZD in depth where PAR equates to \SI{1}{\%} of the surface value\supercite{Lee2007}.
-To assess the MLD, we calculated the mean density above \SI{4}{m} and defined a threshold of 0.125 as difference to the surface. When the mean density exceeded the threshold, we assumed the MLD to occur. 
+We estimated the EZD at pressure values, where PAR equates to \SI{1}{\%} of the surface value\supercite{Lee2007}.
+To assess MLD, we calculated the mean density above \SI{4}{m} and defined $\SI{0.125}{kg/m^3}$ as threshold difference to the surface. 
+We assumed the MLD to occur at pressure values, where mean density values exceed the threshold. 
 \\
 \\
 Data and further information are available on \href{https://github.com/joaldi2208/BloomDynamics}{GitHub}.
 
 \end{document}
-
