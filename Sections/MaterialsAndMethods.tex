@@ -24,7 +24,7 @@ We further limited the data set to the spatial section between \SI{55.58}{\degre
 
 \subsection*{\crule[blue]{.2cm}{.2cm} Analysis}
 We analyzed the data in Python. 
-Using the GSW package, we calculated the potential density from salinity and temperature assuming a pressure of 0 dbar as reference\supercite{gsw}. 
+Using the GSW package, we calculated the potential density from salinity and temperature, and $N^2$\supercite{gsw}. 
 Total wind speed at \SI{10}{m} height above the surface $U_{10m}$ can be evaluated as $U_{10m}$ = $\sqrt[]{u^2 + v^2}$. 
 According to Mehrfar et al. (2018)\supercite{Mehrfar2018}, we calculated the drag coefficient with $C_{Drag} = 0.001\cdot1.2\cdot  (1.1+0.035\cdot U_{10m})$. 
 Wind stress $\tau$ acts as proxy for turbulent energy exchange between water and air.
@@ -33,7 +33,7 @@ Mathematically, it can be approximated by the product of air density $\rho_{Air}
 \\
 To improve the interpretability of chlorophyll and PAR, we log-transformed the data.
 We estimated the EZD in depth where PAR equates to \SI{1}{\%} of the surface value\supercite{Lee2007}.
-To assess MLD, we defined a density threshold criterion of $\SI{0.125}{kg/m^3}$ following Suga et al. (2004)\supercite{Suga2004}, and limited the data to a pressure higher than \SI{4}{dbar}. 
+To assess the MLD, we calculated the mean density above \SI{4}{m} and defined a threshold of 0.125 as difference to the surface. When the mean density exceeded the threshold, we assumed the MLD to occur. 
 \\
 \\
 Data and further information are available on \href{https://github.com/joaldi2208/BloomDynamics}{GitHub}.
