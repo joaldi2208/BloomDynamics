@@ -44,11 +44,10 @@ for i in range(len(all_props.sal)):
     all_props["density"][i] = gsw.sigma0(all_props.sal[i],all_props.temp[i])
     all_props["nsquared"][i] = gsw.Nsquared(all_props.sal[i],all_props.temp[i],all_props.pressure[i])
 
-
 all_props["nsquared1"] = ""
 all_props["nsquared2"] = ""
 for i in range(len(all_props.nsquared)):
-    all_props["nsquared1"][i] = all_props.nsquared[i][0]
+    all_props["nsquared1"][i] = all_props.nsquared[i][0]*1000
     all_props["nsquared2"][i] = all_props.nsquared[i][1]
 
 # Nsquare
@@ -131,8 +130,10 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
             cax = divider.append_axes("right", size="3%", pad=0.5)
             cb = plt.colorbar(plot, cax=cax, ax=ax[i])
             cb.set_ticks(np.arange(int(np.nanmin(stacked_color_values)),
-                int(np.nanmax(stacked_color_values)*1.1),
-                2))
+            int(np.nanmax(stacked_color_values)*1.1),
+            2))
+            print(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values))
+            
         if log == "layers":
             mldr_plot = ax[i].plot(y_axis_values, mld, "navy", label="MLD", linewidth=0.5)
             ezd_plot = ax[i].plot(y_axis_values, ezd, "maroon", label="EZD", linewidth=0.5)
@@ -148,7 +149,7 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
 
 
 def figure_layout(answer):
-    values_to_label = {"density":"Density \n [kg/m$^3$]", "chloro":"Chlorophyll \n [$\mu q$/L]", "temp":"Temperatur \n [$^\circ$C]", "par":"PAR \n [$\mu q/cm² nm¹$]", "sal":"Salinity \n PSU", "wind":"Wind Stress \n [Pa]","par log":"PAR \n [$\mu q/cm² nm¹$]","chloro \n log":"Chlorophyll [$\mu g$/L]","nsquared1": "N$^2$"}
+    values_to_label = {"density":"Density \n [kg/m$^3$]", "chloro":"Chlorophyll \n [$\mu q$/L]", "temp":"Temperatur \n [$^\circ$C]", "par":"PAR \n [$\mu q/cm² nm¹$]", "sal":"Salinity \n PSU", "wind":"Wind Stress \n [Pa]","par log":"PAR \n [$\mu q/cm² nm¹$]","chloro \n log":"Chlorophyll [$\mu g$/L]","nsquared1": "1/1000 N$^2$ \n [rad$^2$/s$^2$]"}
     print("******************************** \n")
     for name_pair in values_to_label.items():
         print(f"{name_pair[0]} --> {name_pair[1]}")
