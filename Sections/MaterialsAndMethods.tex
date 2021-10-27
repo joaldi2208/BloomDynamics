@@ -24,8 +24,9 @@ We further limited the data set to the spatial section between \SI{55.58}{\degre
 \subsection*{\crule[blue]{.2cm}{.2cm} Analysis}
 We analyzed the data in Python.
 Chlorophyll data contained negative values, probably due to the sensor calibration.
-To get the lowest values as zero-values, we increased all values by the same amount.
+We increased all chlorophyll values by the same amount to obtain the lowest value as zero-value.
 To improve the visual interpretability, we log-transformed the data of chlorophyll and PAR.
+
 Using the GSW package, we calculated the potential density from salinity and temperature, and the Brunt-Väisälä frequency ($N^2$) by additionally considering pressure.\supercite{gsw} 
 Total wind speed at \SI{10}{m} height above the surface $U_{10m}$ can be evaluated as $U_{10m}$ = $\sqrt[]{u^2 + v^2}$. 
 Following Mehrfar et al. (2018), we calculated the drag coefficient with $C_{Drag} = 0.001\cdot1.2\cdot  (1.1+0.035\cdot U_{10m})$. 
