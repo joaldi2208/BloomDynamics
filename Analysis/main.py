@@ -7,6 +7,7 @@ import gsw
 import random
 import os
 import matplotlib.colors as colors
+import cmocean.cm as cmo
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
@@ -98,18 +99,18 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
 
     if i == None:
         if log == "log":
-            plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}",norm=colors.LogNorm(), shading="auto")
+            plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"cmo.{colormap}",norm=colors.LogNorm(), shading="auto")
             cb = plt.colorbar(plot)
         else:
-            plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
+            plot = ax.pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"cmo.{colormap}", shading="auto", 
                     norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),50),ncolors=256))
             cb = plt.colorbar(plot)
             cb.set_ticks(np.arange(int(np.nanmin(stacked_color_values)),
                 int(np.nanmax(stacked_color_values)*1.1),
                 2))
         if log == "layers":
-            mldr_plot = ax.plot(y_axis_values, mld, "navy", label="MLD", linewidth=0.5)
-            ezd_plot = ax.plot(y_axis_values, ezd, "maroon", label="EZD", linewidth=0.5)
+            mldr_plot = ax.plot(y_axis_values, mld, "cyan", label="MLD", linewidth=0.5)
+            ezd_plot = ax.plot(y_axis_values, ezd, "magenta", label="EZD", linewidth=0.5)
             legend = ax.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,ncol=2, mode="expand", borderaxespad=0.)
 
         ax.invert_yaxis()
@@ -119,12 +120,12 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
         plt.xlabel("Time [d]", fontsize=15)
     else:
         if log == "log":
-            plot = ax[i].pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", norm=colors.LogNorm(),shading="auto")
+            plot = ax[i].pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"cmo.{colormap}", norm=colors.LogNorm(),shading="auto")
             divider = make_axes_locatable(ax[i])
             cax = divider.append_axes("right", size="3%", pad=0.5)
             cb = plt.colorbar(plot, cax=cax, ax=ax[i])
         else:
-            plot = ax[i].pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"{colormap}", shading="auto", 
+            plot = ax[i].pcolormesh(y_axis_values,x_axis_values,stacked_color_values,cmap=f"cmo.{colormap}", shading="auto", 
                     norm=colors.BoundaryNorm(np.linspace(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values),50),ncolors=256))
             divider = make_axes_locatable(ax[i])
             cax = divider.append_axes("right", size="3%", pad=0.5)
@@ -135,8 +136,8 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
             print(np.nanmin(stacked_color_values),np.nanmax(stacked_color_values))
             
         if log == "layers":
-            mldr_plot = ax[i].plot(y_axis_values, mld, "navy", label="MLD", linewidth=0.5)
-            ezd_plot = ax[i].plot(y_axis_values, ezd, "maroon", label="EZD", linewidth=0.5)
+            mldr_plot = ax[i].plot(y_axis_values, mld, "cyan", label="MLD", linewidth=0.5)
+            ezd_plot = ax[i].plot(y_axis_values, ezd, "magenta", label="EZD", linewidth=0.5)
             legend = ax[i].legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,ncol=2, mode="expand", borderaxespad=0.)
             #legend.get_frame().set_facecolor('C0')
         ax[i].invert_yaxis()
@@ -149,7 +150,7 @@ def create_figure(x_values, y_values, color_values, colormap, values_to_label, i
 
 
 def figure_layout(answer):
-    values_to_label = {"density":"Density \n [kg/m$^3$]", "chloro":"Chlorophyll \n [$\mu q$/L]", "temp":"Temperatur \n [$^\circ$C]", "par":"PAR \n [$\mu q/cm² nm¹$]", "sal":"Salinity \n PSU", "wind":"Wind Stress \n [Pa]","par log":"PAR \n [$\mu q/cm² nm¹$]","chloro \n log":"Chlorophyll [$\mu g$/L]","nsquared1": "1/1000 N$^2$ \n [rad$^2$/s$^2$]"}
+    values_to_label = {"density":"Density \n [kg/m$^3$]", "chloro":"Chlorophyll \n [$\mu q$/L]", "temp":"Temperatur \n [$^\circ$C]", "par":"PAR \n [$\mu q/cm² nm¹$]", "sal":"Salinity \n PSU", "wind":"Wind Stress \n [Pa]","par log":"PAR \n [$\mu q/cm² nm¹$]","chloro \n log":"Chlorophyll [$\mu g$/L]","nsquared1": "N$^2$ \n [rad$^2$/s$^2\cdot 10^3$]"}
     print("******************************** \n")
     for name_pair in values_to_label.items():
         print(f"{name_pair[0]} --> {name_pair[1]}")
